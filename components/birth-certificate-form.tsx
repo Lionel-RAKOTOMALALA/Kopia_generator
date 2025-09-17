@@ -5,6 +5,7 @@ import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Button } from "@/components/ui/button"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { useRouter } from "next/navigation"
 import type { BirthCertificateData } from "../types/birth-certificate"
 
@@ -23,11 +24,11 @@ export default function BirthCertificateForm({ onDataChange, initialData }: Birt
     // Child information
     nom: initialData?.nom || "RAKOTOMALALA",
     prenom: initialData?.prenom || "Tolotriniaiana Lionel",
-    date_naissance: initialData?.date_naissance || "11 MAI 1991",
+    date_naissance: initialData?.date_naissance || "11 MAI",
     annee_naissance: initialData?.annee_naissance || "1991",
-    heure_naissance: initialData?.heure_naissance || "10h00",
+    heure_naissance: initialData?.heure_naissance || "enina ora sy folo minitra",
     lieu_naissance: initialData?.lieu_naissance || "Hôpital de Tuléar",
-    genre: initialData?.genre || "lahy",
+    genre: initialData?.genre || "zazalahy",
 
     // Father information
     nom_pere: initialData?.nom_pere || "RAKOTOMAVO",
@@ -88,22 +89,22 @@ export default function BirthCertificateForm({ onDataChange, initialData }: Birt
   return (
     <Card className="w-full max-w-4xl mx-auto">
       <CardHeader>
-        <CardTitle>Formulaire de Certificat de Naissance</CardTitle>
+        <CardTitle>Taratasy fanamarinana fahaterahana</CardTitle>
       </CardHeader>
       <CardContent>
         <Tabs defaultValue="administrative" className="w-full">
           <TabsList className="grid w-full grid-cols-5">
-            <TabsTrigger value="administrative">Admin</TabsTrigger>
-            <TabsTrigger value="child">Enfant</TabsTrigger>
-            <TabsTrigger value="parents">Parents</TabsTrigger>
-            <TabsTrigger value="officials">Officiels</TabsTrigger>
-            <TabsTrigger value="dates">Dates</TabsTrigger>
+            <TabsTrigger value="administrative">Fanjakana</TabsTrigger>
+            <TabsTrigger value="child">Zaza</TabsTrigger>
+            <TabsTrigger value="parents">Ray aman-dreny</TabsTrigger>
+            <TabsTrigger value="officials">Tompon'andraikitra</TabsTrigger>
+            <TabsTrigger value="dates">Daty</TabsTrigger>
           </TabsList>
 
           <TabsContent value="administrative" className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <Label htmlFor="nom_province">Province</Label>
+                <Label htmlFor="nom_province">Faritany</Label>
                 <Input
                   id="nom_province"
                   value={formData.nom_province}
@@ -111,7 +112,7 @@ export default function BirthCertificateForm({ onDataChange, initialData }: Birt
                 />
               </div>
               <div>
-                <Label htmlFor="nom_commune">Commune</Label>
+                <Label htmlFor="nom_commune">Kaominina</Label>
                 <Input
                   id="nom_commune"
                   value={formData.nom_commune}
@@ -119,7 +120,7 @@ export default function BirthCertificateForm({ onDataChange, initialData }: Birt
                 />
               </div>
               <div>
-                <Label htmlFor="numero">Numéro</Label>
+                <Label htmlFor="numero">Laharana</Label>
                 <Input
                   id="numero"
                   value={formData.numero}
@@ -132,11 +133,11 @@ export default function BirthCertificateForm({ onDataChange, initialData }: Birt
           <TabsContent value="child" className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <Label htmlFor="nom">Nom</Label>
+                <Label htmlFor="nom">Anarana</Label>
                 <Input id="nom" value={formData.nom} onChange={(e) => handleInputChange("nom", e.target.value)} />
               </div>
               <div>
-                <Label htmlFor="prenom">Prénom</Label>
+                <Label htmlFor="prenom">Fanampin'anarana</Label>
                 <Input
                   id="prenom"
                   value={formData.prenom}
@@ -144,7 +145,7 @@ export default function BirthCertificateForm({ onDataChange, initialData }: Birt
                 />
               </div>
               <div>
-                <Label htmlFor="date_naissance">Date de naissance</Label>
+                <Label htmlFor="date_naissance">Daty nahaterahana</Label>
                 <Input
                   id="date_naissance"
                   value={formData.date_naissance}
@@ -152,7 +153,7 @@ export default function BirthCertificateForm({ onDataChange, initialData }: Birt
                 />
               </div>
               <div>
-                <Label htmlFor="annee_naissance">Année de naissance</Label>
+                <Label htmlFor="annee_naissance">Taona nahaterahana</Label>
                 <Input
                   id="annee_naissance"
                   value={formData.annee_naissance}
@@ -160,7 +161,7 @@ export default function BirthCertificateForm({ onDataChange, initialData }: Birt
                 />
               </div>
               <div>
-                <Label htmlFor="heure_naissance">Heure de naissance</Label>
+                <Label htmlFor="heure_naissance">Ora nahaterahana</Label>
                 <Input
                   id="heure_naissance"
                   value={formData.heure_naissance}
@@ -168,7 +169,7 @@ export default function BirthCertificateForm({ onDataChange, initialData }: Birt
                 />
               </div>
               <div>
-                <Label htmlFor="lieu_naissance">Lieu de naissance</Label>
+                <Label htmlFor="lieu_naissance">Toerana nahaterahana</Label>
                 <Input
                   id="lieu_naissance"
                   value={formData.lieu_naissance}
@@ -176,18 +177,26 @@ export default function BirthCertificateForm({ onDataChange, initialData }: Birt
                 />
               </div>
               <div>
-                <Label htmlFor="genre">Genre</Label>
-                <Input id="genre" value={formData.genre} onChange={(e) => handleInputChange("genre", e.target.value)} />
+                <Label htmlFor="genre">Lahy/Vavy</Label>
+                <Select value={formData.genre} onValueChange={(value) => handleInputChange("genre", value)}>
+                  <SelectTrigger id="genre">
+                    <SelectValue placeholder="Misafidiana..." />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="zazalahy">Zazalahy</SelectItem>
+                    <SelectItem value="zazavavy">Zazavavy</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
             </div>
           </TabsContent>
 
           <TabsContent value="parents" className="space-y-6">
             <div>
-              <h3 className="text-lg font-semibold mb-4">Père</h3>
+              <h3 className="text-lg font-semibold mb-4">Ray</h3>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <Label htmlFor="nom_pere">Nom du père</Label>
+                  <Label htmlFor="nom_pere">Anaran-dray</Label>
                   <Input
                     id="nom_pere"
                     value={formData.nom_pere}
@@ -195,7 +204,7 @@ export default function BirthCertificateForm({ onDataChange, initialData }: Birt
                   />
                 </div>
                 <div>
-                  <Label htmlFor="prenom_pere">Prénom du père</Label>
+                  <Label htmlFor="prenom_pere">Fanampin'anaran-dray</Label>
                   <Input
                     id="prenom_pere"
                     value={formData.prenom_pere}
@@ -203,7 +212,7 @@ export default function BirthCertificateForm({ onDataChange, initialData }: Birt
                   />
                 </div>
                 <div>
-                  <Label htmlFor="travail_pere">Travail du père</Label>
+                  <Label htmlFor="travail_pere">Asan-dray</Label>
                   <Input
                     id="travail_pere"
                     value={formData.travail_pere}
@@ -222,10 +231,10 @@ export default function BirthCertificateForm({ onDataChange, initialData }: Birt
             </div>
 
             <div>
-              <h3 className="text-lg font-semibold mb-4">Mère</h3>
+              <h3 className="text-lg font-semibold mb-4">Reny</h3>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <Label htmlFor="nom_mere">Nom de la mère</Label>
+                  <Label htmlFor="nom_mere">Anaran-dreny</Label>
                   <Input
                     id="nom_mere"
                     value={formData.nom_mere}
@@ -233,7 +242,7 @@ export default function BirthCertificateForm({ onDataChange, initialData }: Birt
                   />
                 </div>
                 <div>
-                  <Label htmlFor="prenom_mere">Prénom de la mère</Label>
+                  <Label htmlFor="prenom_mere">Fanampin'anaran-dreny</Label>
                   <Input
                     id="prenom_mere"
                     value={formData.prenom_mere}
@@ -241,7 +250,7 @@ export default function BirthCertificateForm({ onDataChange, initialData }: Birt
                   />
                 </div>
                 <div>
-                  <Label htmlFor="travail_mere">Travail de la mère</Label>
+                  <Label htmlFor="travail_mere">Asan-dreny</Label>
                   <Input
                     id="travail_mere"
                     value={formData.travail_mere}
@@ -249,7 +258,7 @@ export default function BirthCertificateForm({ onDataChange, initialData }: Birt
                   />
                 </div>
                 <div>
-                  <Label htmlFor="adresse_parent">Adresse des parents</Label>
+                  <Label htmlFor="adresse_parent">Adiresin'ny ray aman-dreny</Label>
                   <Input
                     id="adresse_parent"
                     value={formData.adresse_parent}
@@ -262,10 +271,10 @@ export default function BirthCertificateForm({ onDataChange, initialData }: Birt
 
           <TabsContent value="officials" className="space-y-6">
             <div>
-              <h3 className="text-lg font-semibold mb-4">Sage-femme</h3>
+              <h3 className="text-lg font-semibold mb-4">Mpampivelona</h3>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <Label htmlFor="nom_sage_femme">Nom sage-femme</Label>
+                  <Label htmlFor="nom_sage_femme">Anaran'ny mpampivelona</Label>
                   <Input
                     id="nom_sage_femme"
                     value={formData.nom_sage_femme}
@@ -273,7 +282,7 @@ export default function BirthCertificateForm({ onDataChange, initialData }: Birt
                   />
                 </div>
                 <div>
-                  <Label htmlFor="prenom_sage_femme">Prénom sage-femme</Label>
+                  <Label htmlFor="prenom_sage_femme">Fanampin'anaran'ny mpampivelona</Label>
                   <Input
                     id="prenom_sage_femme"
                     value={formData.prenom_sage_femme}
@@ -284,10 +293,10 @@ export default function BirthCertificateForm({ onDataChange, initialData }: Birt
             </div>
 
             <div>
-              <h3 className="text-lg font-semibold mb-4">Témoin</h3>
+              <h3 className="text-lg font-semibold mb-4">Vavolombelona</h3>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <Label htmlFor="nom_temoin">Nom témoin</Label>
+                  <Label htmlFor="nom_temoin">Anaran'ny vavolombelona</Label>
                   <Input
                     id="nom_temoin"
                     value={formData.nom_temoin}
@@ -295,7 +304,7 @@ export default function BirthCertificateForm({ onDataChange, initialData }: Birt
                   />
                 </div>
                 <div>
-                  <Label htmlFor="prenom_temoin">Prénom témoin</Label>
+                  <Label htmlFor="prenom_temoin">Fanampin'anaran'ny vavolombelona</Label>
                   <Input
                     id="prenom_temoin"
                     value={formData.prenom_temoin}
@@ -309,7 +318,7 @@ export default function BirthCertificateForm({ onDataChange, initialData }: Birt
           <TabsContent value="dates" className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <Label htmlFor="année_construction">Année construction</Label>
+                <Label htmlFor="année_construction">Taona namoronana</Label>
                 <Input
                   id="année_construction"
                   value={formData.année_construction}
@@ -317,7 +326,7 @@ export default function BirthCertificateForm({ onDataChange, initialData }: Birt
                 />
               </div>
               <div>
-                <Label htmlFor="date_construction_copie">Date construction copie</Label>
+                <Label htmlFor="date_construction_copie">Daty namoronana ny kopia</Label>
                 <Input
                   id="date_construction_copie"
                   value={formData.date_construction_copie}
@@ -325,7 +334,7 @@ export default function BirthCertificateForm({ onDataChange, initialData }: Birt
                 />
               </div>
               <div>
-                <Label htmlFor="date_enregistrement">Date enregistrement</Label>
+                <Label htmlFor="date_enregistrement">Daty nanoratana</Label>
                 <Input
                   id="date_enregistrement"
                   value={formData.date_enregistrement}
@@ -333,7 +342,7 @@ export default function BirthCertificateForm({ onDataChange, initialData }: Birt
                 />
               </div>
               <div>
-                <Label htmlFor="annee_enregistrement">Année enregistrement</Label>
+                <Label htmlFor="annee_enregistrement">Taona nanoratana</Label>
                 <Input
                   id="annee_enregistrement"
                   value={formData.annee_enregistrement}
@@ -346,7 +355,7 @@ export default function BirthCertificateForm({ onDataChange, initialData }: Birt
 
         <div className="mt-6 text-center">
           <Button onClick={handleValidateForm} className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-2">
-            Valider et Générer le Certificat
+            Hamarino sy hamorony ny taratasy
           </Button>
         </div>
       </CardContent>

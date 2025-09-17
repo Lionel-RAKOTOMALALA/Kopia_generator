@@ -14,7 +14,7 @@ function CertificateContent() {
 
     nom: searchParams.get("nom") || "RAKOTOMALALA",
     prenom: searchParams.get("prenom") || "Tolotriniaina Lionel",
-    date_naissance: searchParams.get("date_naissance") || "11 Mai 1991",
+    date_naissance: searchParams.get("date_naissance") || "11 Mai",
     annee_naissance: searchParams.get("annee_naissance") || "1991",
     heure_naissance: searchParams.get("heure_naissance") || "6h10",
     lieu_naissance: searchParams.get("lieu_naissance") || "Clinique Saint-Luc - Toliara",

@@ -9,7 +9,7 @@ const defaultData: BirthCertificateData = {
     anarana: "RAKOTOMALALA",
     fanampin_anarana: "Tolotriniaina Lionel",
     lahy_na_vavy: "Zazavavy",
-    daty_nahaterahana: "11 Mai 1991",
+    daty_nahaterahana: "11 Mai",
     ora_nahaterahana: "6h10",
     toerana_nahaterahana: "Clinique Saint-Luc - Toliara",
   },
