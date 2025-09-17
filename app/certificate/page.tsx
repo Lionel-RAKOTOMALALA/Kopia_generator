@@ -1,8 +1,7 @@
 "use client"
 import { useSearchParams } from "next/navigation"
 import { Suspense } from "react"
-import BirthCertificateDisplay from "../../components/birth-certificate-display"
-import PDFGenerator from "../../components/pdf-generator"
+import DocxGenerator from "../../components/docx-generator" // Le nouveau composant
 import type { BirthCertificateData } from "../../types/birth-certificate"
 
 function CertificateContent() {
@@ -55,22 +54,12 @@ function CertificateContent() {
     annee_enregistrement: searchParams.get("annee_enregistrement") || "1991",
   }
 
-  return (
-    <div className="min-h-screen bg-gray-50 py-8">
-      <div className="container mx-auto px-4 max-w-7xl">
-        <div className="mb-6 text-center">
-          <h1 className="text-3xl font-bold mb-6">Certificat de Naissance</h1>
-          <PDFGenerator data={certificateData} />
-        </div>
-        <BirthCertificateDisplay data={certificateData} />
-      </div>
-    </div>
-  )
+  return <DocxGenerator data={certificateData} />
 }
 
 export default function CertificatePage() {
   return (
-    <Suspense fallback={<div>Chargement...</div>}>
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Chargement...</div>}>
       <CertificateContent />
     </Suspense>
   )
