@@ -50,16 +50,25 @@ export default function SimpleDocxGenerator({ data }: SimpleDocxGeneratorProps) 
   const [isGenerating, setIsGenerating] = useState(false)
 
   const generateAndOpenPDF = async () => {
+    // Si déjà en cours de génération, ne rien faire
+    if (isGenerating) return
+    
     setIsGenerating(true)
     
     try {
+      const controller = new AbortController()
+      const timeoutId = setTimeout(() => controller.abort(), 30000) // 30 secondes timeout
+      
       const response = await fetch('/api/generate-pdf', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
+        signal: controller.signal
       })
+
+      clearTimeout(timeoutId)
 
       if (!response.ok) {
         throw new Error('Erreur lors de la génération')
@@ -76,14 +85,14 @@ export default function SimpleDocxGenerator({ data }: SimpleDocxGeneratorProps) 
         newWindow.onload = () => {
           setTimeout(() => {
             newWindow.print()
-          }, 1000)
+          }, 2000) // Augmenté à 2 secondes pour plus de fiabilité
         }
       }
       
-      // Nettoyer l'URL après un délai
+      // Nettoyer l'URL après un délai plus long
       setTimeout(() => {
         URL.revokeObjectURL(url)
-      }, 5000)
+      }, 10000) // Augmenté à 10 secondes
       
     } catch (error) {
       console.error('Erreur:', error)
@@ -96,7 +105,7 @@ export default function SimpleDocxGenerator({ data }: SimpleDocxGeneratorProps) 
   return (
     <div className="min-h-screen bg-gray-50 py-8">
       <div className="container mx-auto px-4 max-w-2xl text-center">
-        <h1 className="text-3xl font-bold mb-8">Certificat de Naissance</h1>
+        <h1 className="text-3xl font-bold mb-8">Kopia Nahaterahana</h1>
         
         <div className="bg-white rounded-lg shadow-md p-6 mb-8">
           <h2 className="text-xl font-semibold mb-4">Résumé</h2>
